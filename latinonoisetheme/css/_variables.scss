@@ -1,0 +1,65 @@
+/* scss/initialization/_variables.scss */
+
+// Hello there,
+// We initialize every variable here to 
+// make everything consistent
+
+// Color Init
+$theme-colors: (
+  "primary"   : #155E63,
+  "secondary" : #002F33,
+  "success"   : #28D898,
+  "danger"    : #FD7B7B,
+  "warning"   : #FAD19A,
+  "info"      : #8AC0F7,
+  "dark"      : #444444,
+  "gray"      : #53616E,
+  "lightgray"      : #707070
+); 
+$gradient-colors: (
+  ("#155E63" "#8E56C6"),
+  ("#C67156" "#045D63"),
+  ("#7A00C0" "#045D63"),
+  ("#00C0C0" "#045D63")
+);
+
+
+// Font Init
+$primary_font   : 'Merriweather', serif;
+$secondary_font : 'Open Sans', sans-serif;
+
+// Font Weights
+$primary_font-weight-map: (
+	"light" : 300,
+	"regular" : 400,
+	"bold"    : 700
+);
+$secondary_font-weight-map: (
+	"light"    : 300,
+	"regular"  : 400,
+	"semibold" : 600,
+	"bold"     : 700
+);
+
+
+// Font Sizes
+$rem-base : 16px;
+$font-sizes: (
+	"h1"	: 45px,
+	"h2"	: 37px,
+	"h3"	: 32px,
+	"h4"	: 27px,
+	"h5"	: 21px,
+	"h6"	: 18px,
+	"small" : 13px,
+	"p" : 25px
+);
+
+// Breakpoints
+$vp-sizes : (
+	"mobile-s" : 680,
+	"mobile"   : 768,
+	"tablet"   : 990,
+	"laptop"   : 1024,
+	"desktop"  : 1280
+);

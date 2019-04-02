@@ -1,0 +1,213 @@
+/* scss/initialization/_mixins.scss */
+
+// Font Mixins //
+
+// Mixins primary font + weight
+@mixin primary_font($weight_type : "normal"){
+	font-family: $primary_font;
+ 	@each $index, $variable in $primary_font-weight-map{
+ 		@if $weight_type == $index{
+ 			font-weight: $variable;
+ 		}
+ 	}
+}
+// Mixins secondary font + weight
+@mixin secondary_font($weight_type : "normal"){
+	font-family: $secondary_font;
+	@each $index, $variable in $secondary_font-weight-map{
+ 		@if $weight_type == $index{
+ 			font-weight: $variable;
+ 		}
+ 	}
+}
+
+
+// Converts px to rem values including fallback
+@mixin font-size($size) {
+  font-size: $size;
+  font-size: rem-calc($size);
+}
+
+// Clip text for gradient backgrounds
+@mixin clip_text(){
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+
+// Automated 
+
+
+// Shadow box Helper
+
+
+ 
+%reset-button {
+    border: none;  
+    overflow: visible;
+    background: transparent;
+    line-height: normal;
+    -webkit-font-smoothing: inherit;
+    -moz-osx-font-smoothing: inherit;
+    -webkit-appearance: none; 
+}
+%card-shadow {
+      // box-shadow: 0 14px 28px rgba(0,0,0,0.10), 0 10px 10px rgba(0,0,0,0.07);
+	box-shadow: 0 1px 4px 0 rgba(0,0,0,0.20);
+}
+%card-shadow2 {
+    // box-shadow: 0 14px 28px rgba(0,0,0,0.10), 0 10px 10px rgba(0,0,0,0.07);
+	box-shadow: 5px 5px 4px 0 rgba(0, 0, 0, 0.2);
+}
+%card-shadow-light {
+    // box-shadow: 0 14px 28px rgba(0,0,0,0.10), 0 10px 10px rgba(0,0,0,0.07);
+	box-shadow:0px 6px 14px 0px rgba(33, 37, 41, 0.10196078431372549);
+}
+@mixin card-shadow-light{
+	box-shadow:0px 6px 14px 0px rgba(33, 37, 41, 0.10196078431372549);
+}
+%card-shadow-dark {
+    // box-shadow: 0 14px 28px rgba(0,0,0,0.10), 0 10px 10px rgba(0,0,0,0.07);
+	box-shadow: 0px 1px 18px 0px rgba(33, 37, 41, 0.36);
+}
+@mixin card-shadow-dark{
+	box-shadow: 0px 1px 18px 0px rgba(33, 37, 41, 0.36);
+}
+//Helpers Mixins :: Refer to _variables.scss
+@mixin colorfy($prop: 'text'){
+	#{$personal} &{
+		@if $prop == 'text'{
+			color: $personal-primary;
+		}
+		@else if $prop == 'bg'{
+			background-color: $personal-primary;
+		} 
+	}
+	#{$business} &{
+		@if $prop == 'text'{
+			color: $business-primary;
+		}
+		@else if $prop == 'bg'{
+			background-color: $business-primary;
+		} 
+	}
+}
+
+@mixin home(){
+	body.home &{
+		@content;
+	}
+}
+@mixin inner(){
+	body.inner-page &{
+		@content;
+	}
+}
+  
+ @mixin click_states(){
+	&:hover, 
+	&:focus,
+	&:active,
+	&:visited{
+		@content;
+	}
+
+}
+
+// Media queries
+@mixin vp-size($range, $size){
+	$breakpoint : getBreakpoint($size);
+	@if $range == "minw" {
+		@media (min-width: $breakpoint){
+			@content;
+		}
+	}
+}
+
+@mixin desktop($type){
+	@if $type == 'fhd'{
+		@media (max-width: 1440px){
+			@content; 
+		}
+	}
+	@if $type == 'hd'{
+		@media (max-width: 1130px){
+			@content; 
+		}
+	}
+}
+
+
+@mixin mobile(){
+	@media (max-width: 660px){
+		@content; 
+	}
+}
+
+@mixin mobile_height(){
+	@media (max-height: 590px){
+		@content; 
+	}
+}
+@mixin o-mobile(){
+	@media (min-width: 768px){
+		@content; 
+	}
+}
+@mixin tablet(){
+	@media (max-width: 768px) {
+		@content; 
+	}
+}
+@mixin o-tablet(){
+	@media (min-width: 1030px){ 
+		@content; 
+	}
+}
+@mixin oo-tablet(){
+	@media (min-width: 992px){ 
+		@content; 
+	}
+}
+@mixin ii-tablet(){
+	@media (max-width: 990px){ 
+		@content; 
+	}
+}
+@mixin laptop(){
+	@media (max-width: 1024px){
+		@content; 
+	}
+}
+
+@mixin ipad-portrait(){
+	@media only screen 
+	and (min-device-width : 768px) 
+	and (max-device-width : 1024px) 
+	and (orientation : portrait) { @content;  }
+}
+
+@mixin ipad-landscape(){
+	@media only screen 
+	and (min-device-width : 768px) 
+	and (max-device-width : 1024px) 
+	and (orientation : landscape) { @content;  }
+}
+
+@mixin iphone-landscape(){
+	@media only screen 
+	and (min-device-width : 375px) 
+	and (max-device-width : 667px) 
+	and (orientation : landscape) { @content;  }
+}
+
+@mixin iphonex-landscape(){
+	@media only screen 
+	and (min-device-width : 375px) 
+	and (max-device-width : 812px) 
+	and (-webkit-device-pixel-ratio : 3)
+	and (orientation : landscape) { @content; }
+}
+
+
+@function get-vw($target) {   $vw-context: (1440 * 0.01) * 1px;   @return ($target / $vw-context) * 1vw; }
