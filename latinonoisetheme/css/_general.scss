@@ -1,0 +1,91 @@
+/* scss/initialization/_general.scss */
+ 
+@import url("https://fonts.googleapis.com/css?family=Merriweather:300,400,700");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
+
+
+// Defaults
+html, body{
+	font-size: $rem_base;
+	@include secondary_font();
+}
+
+*{
+	-webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+::selection {
+  	color: color('dark'); 
+ 	background-color: rgba(#155E63, 0.1);
+}
+
+@media (min-width: 1900px){
+	.container-fluid{
+		max-width: 1920px;
+	}
+}
+
+
+a{
+	&:hover{
+		text-decoration: none;
+	}
+}
+  
+.container {
+	@include vp-size(minw, desktop){
+	
+		max-width: 1140px;
+	}
+}
+.indent-section{ 
+	padding-left: rem-calc(100px);
+	padding-right: rem-calc(100px);
+	padding-top: rem-calc(70px);
+	padding-bottom: rem-calc(70px);
+	@include desktop(hd){
+		padding-left: rem-calc(20px);
+		padding-right: rem-calc(20px);
+	}
+}
+.main-section{
+	position: relative;
+	z-index: 110;
+	background-color: #FFF;
+}
+
+.text{ 
+	&--idle{
+		visibility: hidden;
+	}
+}
+
+.bg-gray{
+	background-color: #F9F9F9;
+}
+
+.splitText{
+	&__holder{
+		
+	}
+	&__word{
+		font-size: 1em;
+		vertical-align: top;
+		overflow: hidden;
+		display: inline-block;
+		position: relative;
+		&:before{
+			content: attr(data-content)" ";
+			display: inline-block;
+			transform: translateY(0%);
+			transition: transform 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+		}
+		&--idle {
+			&:before{
+				transform: translateY(100%);
+			}
+		}
+	}
+}
