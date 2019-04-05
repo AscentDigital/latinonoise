@@ -251,6 +251,29 @@ h1,h2,h3,h4,h5,h6{
   .text-bottom{
     bottom: 10px;
   }
+  .center-play{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 100px;
+    opacity: 0.5;
+    will-change: transform;
+    transition: 0.4s ease-in-out;
+    pointer-events: none;
+    color: #000;
+  }
+  &:hover .center-play{ 
+    transform: scale(1.3);
+    z-index: 200;
+    color: $primary;
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.4);
+  }
 
 }
 
@@ -258,6 +281,7 @@ h1,h2,h3,h4,h5,h6{
   font-size: 25px; 
   line-height: 100%;
 }
+
 
 .text-left{
   text-align: left;
