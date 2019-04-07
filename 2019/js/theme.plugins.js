@@ -487,7 +487,7 @@
 			var header = $('[role="banner"]');
 
 			header.off('.search').on('click.search','.search_buttons button',function(){
-				var searchform = header.find('[role="search"]'),
+				var searchform = header.find('[role="search" action="./search-results.html"]'),
 					self = $(this);
 
 					console.log(searchform);
