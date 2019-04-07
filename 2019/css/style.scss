@@ -5571,11 +5571,11 @@ form.search{
   visibility: hidden;
 }
 
-[role="search"]:not([class*="type_"]){
+[role="search" action="./search-results.html"]:not([class*="type_"]){
   width: 95%;
 }
 
-[role="search"]:not([class*="type_"]) input[type="text"]{
+[role="search" action="./search-results.html"]:not([class*="type_"]) input[type="text"]{
   width: 95%;
   background: transparent;
   border: none;

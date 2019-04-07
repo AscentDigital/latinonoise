@@ -658,3 +658,45 @@ span.mejs-currenttime {
 .mejs-controls .mejs-horizontal-volume-slider .mejs-horizontal-volume-current {
     background: #fff;
 }
+
+
+// 
+.vertical-text-wrapper{
+  min-height: 600px;
+    position: relative;
+    overflow: hidden;
+    @media (max-width: 768px){
+      min-height: unset;
+    }
+}
+.vertical-text{
+      width: 600px;
+    position: absolute;
+    transform: rotate(270deg);
+    bottom: -60px;
+    left: 0px;
+    transform-origin: top left;
+    text-align: right;
+    font-size: 30px;
+    @media (max-width: 768px){
+      transform: rotate(0deg);
+      position: relative;
+      bottom: 0px;
+      left: 0px;
+      font-size: 15px;
+      text-align: left
+    }
+}
+
+
+.searchform_wrap{
+  form{
+    width: 100%;
+  }
+  input:not([type="submit"]), textarea{
+    width: 100%;;
+    margin-top: 3px;
+    background: transparent;
+    border-color: transparent
+  }
+}
