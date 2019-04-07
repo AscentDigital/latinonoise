@@ -366,6 +366,22 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 30px;
 }
 
+.scale_image_container.favoritos-thumb {
+  max-width: 160px;
+  float: left;
+  margin-right: 15px;
+}
+
+@media (max-width: 655px) {
+  .scale_image_container.favoritos-thumb {
+    max-width: 100%;
+  }
+}
+
+.scale_image_container.favoritos-thumb.full {
+  max-width: 100%;
+}
+
 .scale_image_container.push {
   margin-top: 28px;
 }
@@ -885,5 +901,49 @@ span.mejs-currenttime {
   margin-top: 3px;
   background: transparent;
   border-color: transparent;
+}
+
+.fav {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 40px;
+  width: 40px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  pointer-events: none;
+}
+
+.fav-belleza {
+  background-image: url("../favoritos/belleza.png");
+}
+
+.fav-clubs {
+  background-image: url("../favoritos/clubs.png");
+}
+
+.fav-licor {
+  background-image: url("../favoritos/licor.png");
+}
+
+.fav-media {
+  background-image: url("../favoritos/media.png");
+}
+
+.fav-restaurant {
+  background-image: url("../favoritos/restaurant.png");
+}
+
+.fav-ropa {
+  background-image: url("../favoritos/ropa.png");
+}
+
+.fav-salud {
+  background-image: url("../favoritos/salud.png");
+}
+
+.fav-supermercados {
+  background-image: url("../favoritos/supermercados.png");
 }
 /*# sourceMappingURL=style-extended.css.map */

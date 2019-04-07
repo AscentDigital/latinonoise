@@ -225,6 +225,18 @@ h1,h2,h3,h4,h5,h6{
 .scale_image_container{
   position: relative;
   margin-bottom: 30px;
+  &.favoritos-thumb{
+        max-width: 160px;
+    float: left;
+    margin-right: 15px;
+    @media (max-width: 655px){
+      max-width: 100%;
+      
+    }
+    &.full{
+      max-width: 100%;
+    }
+  }
   &.push{
     margin-top: 28px;
   }
@@ -700,3 +712,29 @@ span.mejs-currenttime {
     border-color: transparent
   }
 }
+
+
+.fav{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 40px;
+  width: 40px;
+  background:{
+    size: contain;
+    repeat: no-repeat;
+    position: center center;
+  }
+  pointer-events: none;
+}
+
+$icons: belleza, clubs, licor, media, restaurant, ropa, salud, supermercados;
+
+@each $icon in $icons{
+  .fav-#{$icon}{
+     background-image: url('../favoritos/#{$icon}.png');
+  }
+}
+
+
+ 
