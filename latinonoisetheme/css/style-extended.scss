@@ -1,11 +1,12 @@
 /* 
     Title: Extend/Override style.css
     Date Created: 30 Mar 2019
-    Author: DRB
+    Author: Modified by: https://github.com/dresdain
 */
 
 /* Imports */
 @import url('https://fonts.googleapis.com/css?family=Montserrat:100,300,400,500,600,700');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700');
 @import "_variables";
 @import "_functions";
 @import "_mixins";
@@ -224,6 +225,18 @@ h1,h2,h3,h4,h5,h6{
 .scale_image_container{
   position: relative;
   margin-bottom: 30px;
+  &.favoritos-thumb{
+        max-width: 160px;
+    float: left;
+    margin-right: 15px;
+    @media (max-width: 655px){
+      max-width: 100%;
+      
+    }
+    &.full{
+      max-width: 100%;
+    }
+  }
   &.push{
     margin-top: 28px;
   }
@@ -234,6 +247,73 @@ h1,h2,h3,h4,h5,h6{
     float: unset !important;
     margin-bottom: 20px;
   }
+  .text-top, .text-bottom{
+    position: absolute;  
+    left: 20px;
+    width: calc(100% - 40px);
+    max-height: 50%;
+    z-index: 100;
+    pointer-events: none;
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 900;
+  }
+  .text-top{
+    top: 15px;
+  }
+  .text-bottom{
+    bottom: 10px;
+  }
+  .center-play{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 100px;
+    opacity: 0.5;
+    will-change: transform;
+    transition: 0.4s ease-in-out;
+    pointer-events: none;
+    color: #000;
+    overflow: hidden;
+  }
+  &:hover .center-play{ 
+    transform: scale(1.3) translateY(-20px);
+    // z-index: 200;
+    color: $primary;
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+}
+ 
+
+
+.text-big{
+  font-size: 25px; 
+  line-height: 100%;
+}
+
+
+.text-left{
+  text-align: left;
+}
+.text-right{
+  text-align: right;
+}
+
+.text-uppercase{
+  text-transform: uppercase !important;
+}
+
+.text-light{
+  color: #FFF;
+}
+.text-dark{
+  color: #000;
 }
 
 .scale_width_250{
@@ -289,7 +369,7 @@ h1,h2,h3,h4,h5,h6{
 
 .section_title{
   font-weight: bold;
-      font-family: 'Roboto', 'sans-serif';
+      // font-family: 'Roboto', 'sans-serif';
 }
 
 /* Social MEdia lIst */
@@ -590,3 +670,71 @@ span.mejs-currenttime {
 .mejs-controls .mejs-horizontal-volume-slider .mejs-horizontal-volume-current {
     background: #fff;
 }
+
+
+// 
+.vertical-text-wrapper{
+  min-height: 600px;
+    position: relative;
+    overflow: hidden;
+    @media (max-width: 768px){
+      min-height: unset;
+    }
+}
+.vertical-text{
+      width: 600px;
+    position: absolute;
+    transform: rotate(270deg);
+    bottom: -60px;
+    left: 0px;
+    transform-origin: top left;
+    text-align: right;
+    font-size: 30px;
+    @media (max-width: 768px){
+      transform: rotate(0deg);
+      position: relative;
+      bottom: 0px;
+      left: 0px;
+      font-size: 15px;
+      text-align: left
+    }
+}
+
+
+.searchform_wrap{
+  form{
+    width: 100%;
+  }
+  input:not([type="submit"]), textarea{
+    width: 100%;;
+    margin-top: 3px;
+    background: transparent;
+    border-color: transparent
+  }
+}
+
+
+.fav{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 40px;
+  width: 40px;
+  background:{
+    size: contain;
+    repeat: no-repeat;
+    position: center center;
+  }
+  pointer-events: none;
+}
+
+$icons: belleza, clubs, licor, media, restaurant, ropa, salud, supermercados;
+
+@each $icon in $icons{
+  .fav-#{$icon}{
+     background-image: url('../favoritos/#{$icon}.png');
+  }
+}
+
+
+ 

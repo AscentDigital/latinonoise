@@ -1,0 +1,12 @@
+.pagination_block .page-numbers{
+	padding: 5px 11px;
+    color: #212428;
+    margin-left: 2px;
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+    line-height: 30px;
+}
+.pagination_block .current{
+    background: #ff680d;
+    line-height: 22px;
+}

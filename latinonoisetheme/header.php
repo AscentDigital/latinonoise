@@ -3,11 +3,14 @@
 <!--[if(gt IE 9)|!(IE)]><!-->
 <html lang="en">
 <!--<![endif]-->
-
+<?php 
+global $wp;
+global $option; 
+?>
 <head>
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,500,700" />
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" />
-    <title>Home :: Latino Noise</title>
+    <title> <?php wp_title(); ?> <?php bloginfo( 'name' ); ?></title>
     <meta name="format-detection" content="telephone=no" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -34,6 +37,9 @@
     <meta name="theme-color" content="#ffffff">
     <!--stylesheet include-->
     <?php wp_head(); ?>
+    <script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=xa-5306f8f674bfda4c"></script>
+    <script src="https://www.grandvincent-marion.fr/_codepen/jquery.fancybox.pack.js"></script>
+    <script src="https://www.grandvincent-marion.fr/_codepen/mediaelement-and-player.min.js"></script>
 </head>
 
 <body class="wide_layout">
@@ -72,21 +78,21 @@
                                                                     <input type="checkbox" id="checkbox_10" />
                                                                     <label for="checkbox_10">Recuérdame</label>
                                                                 </li>
-                                                                <li><a href="#" class="button button_orange">Log In</a>
-                                                                    <div class="t_align_c"><a href="#"
+                                                                <li><a href="<?php echo get_site_url(); ?>/login/" class="button button_orange">Log In</a>
+                                                                    <div class="t_align_c"><a href="<?php echo get_site_url(); ?>/forgot/"
                                                                         class="color_dark">¿Olvidaste tu contraseña?</a>
-                                                                        <br /><a href="#" class="color_dark">¿Olvidó su nombre
+                                                                        <br /><a href="<?php echo get_site_url(); ?>/forgot/" class="color_dark">¿Olvidó su nombre
                                                                         de usuario?</a></div>
                                                                     </li>
                                                                 </ul>
                                                             </form>
                                                             <section class="login_footer">
-                                                                <h3>Nuevo en Latino Noise?</h3><a href="#"
+                                                                <h3>Nuevo en Latino Noise?</h3><a href="<?php echo get_site_url(); ?>/register/"
                                                                 class="button button_grey">REGISTRATE</a>
                                                             </section>
                                                         </div>
                                                     </li>
-                                                    <li class="login_button"><a href="#" role="button">Registrate</a></li>
+                                                    <li class="login_button"><a href="<?php echo get_site_url(); ?>/register/" role="button">Registrate</a></li>
                                                     <!--language/location settings-->
                                                     <li class="lang_button"><a role="button" href="#"><span
                                                         class="d_mxs_none">Houston</span></a>
@@ -129,27 +135,15 @@
                                     <!--main menu-->
                                     <nav role="navigation" class="main_menu menu_var2">
                                         <ul>
-                                            <li class="current"><a href="<?php echo get_template_directory_uri(); ?>/index.html">INICIO<span class="plus"><i
-                                                class="fa fa-plus-square-o"></i><i
-                                                class="fa fa-minus-square-o"></i></span></a></li>
-                                                <li><a href="<?php echo get_template_directory_uri(); ?>/noticias.html">NOTICIAS<span class="plus"><i
-                                                    class="fa fa-plus-square-o"></i><i
-                                                    class="fa fa-minus-square-o"></i></span></a></li>
-                                                    <li><a href="<?php echo get_template_directory_uri(); ?>/musica.html">MÚSICA<span class="plus"><i class="fa fa-plus-square-o"></i><i
-                                                        class="fa fa-minus-square-o"></i></span></a></li>
-                                                        <li><a href="<?php echo get_template_directory_uri(); ?>/ganatelo.html">GANATELO<span class="plus"><i
-                                                            class="fa fa-plus-square-o"></i><i
-                                                            class="fa fa-minus-square-o"></i></span></a></li>
-                                                            <li><a href="#">GALERIAS<span class="plus"><i class="fa fa-plus-square-o"></i><i
-                                                                class="fa fa-minus-square-o"></i></span></a></li>
-                                                                <li><a href="#">VIDEOS<span class="plus"><i class="fa fa-plus-square-o"></i><i
-                                                                    class="fa fa-minus-square-o"></i></span></a></li>
-                                                                    <li><a href="#">CHICAS<span class="plus"><i class="fa fa-plus-square-o"></i><i
-                                                                        class="fa fa-minus-square-o"></i></span></a></li>
-                                                                        <li><a href="#">EVENTOS<span class="plus"><i class="fa fa-plus-square-o"></i><i
-                                                                            class="fa fa-minus-square-o"></i></span></a></li>
-                                                                            <li><a href="#">DIRECTORIO<span class="plus"><i class="fa fa-plus-square-o"></i><i
-                                                                                class="fa fa-minus-square-o"></i></span></a></li>
+                                        <?php 
+                                        $menuLocations = get_nav_menu_locations();
+                                          $menuID = $menuLocations['primary'];
+                                          $menus = wp_get_nav_menu_items($menuID);
+                                            foreach ($menus as $menu) {
+                                                $check = is_page($menu->ID);
+                                        ?>
+                                            <li class ="<?php if (is_page($menu->title)) echo 'current'; ?>"><a href="<?php echo $menu->url ?>"><?php echo $menu->title; ?></a></li>
+                                                                            <?php } ?>
                                                                             </ul>
                                                                         </nav>
                                                                         <div class="search-holder">
@@ -160,7 +154,7 @@
                                                                                 <!--search form-->
                                                                                 <div class="searchform_wrap">
                                                                                     <div class="container vc_child h_inherit relative">
-                                                                                        <form role="search">
+                                                                                        <form role="search" action = "<?php echo get_site_url(); ?>/search/">
                                                                                             <input type="text" name="search" placeholder="🔍 Search Latino Noise" /> </form>
                                                                                             <button class="close_search_form"><i class="fa fa-times"></i></button>
                                                                                         </div>

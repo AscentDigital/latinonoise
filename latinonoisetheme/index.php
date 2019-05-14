@@ -1,62 +1,20 @@
 <?php  
 	get_header();
 ?>
-	<!--==============================content================================-->
+<!--==============================content================================-->
         <div class="content">
             <div class="container">
                 <!--banners-->
                 <div class="clearfix">
-                    <div class="half_column image-card blue" data-appear-animation="fadeInDown"
-                         data-appear-animation-delay="1150">
-                        <div class="scale_image_container">
-                            <a href="./noticias.html"><img src="http://unsplash.it/565/377?gravity=center" alt=""
-                                     class="scale_image" /></a>
-                            <!--caption-->
-                            <div class="caption_type_1">
-                                <div class="caption_inner">
-                                    <div class="clearfix"><a href="#" role="button"
-                                           class="button banner_button orange">NOTICIAS</a>
-                                        <div class="event_date">JULIO 10 2018</div>
-                                    </div>
-                                    <a href="#">
-                                        <h2>Titulo de la nota o algo realcionado con la imagen</h2>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="half_column image-card orange" data-appear-animation="fadeInDown"
-                         data-appear-animation-delay="1150">
-                        <div class="scale_image_container">
-                            <a href="#"><img src="http://unsplash.it/565/377?random&gravity=south" alt=""
-                                     class="scale_image" /></a>
-                            <!--caption-->
-                            <div class="caption_type_1">
-                                <div class="caption_inner">
-                                    <div class="clearfix"><a href="./musica.html"
-                                           class="button banner_button blue">MUSICA</a>
-                                        <div class="event_date">July 01,2014 5:50 am</div>
-                                    </div>
-                                    <a href="#">
-                                        <h2>Titulo de la nota o algo realcionado con la imagen</h2>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <?php get_template_part('includes/noticias');?>
+                    <?php get_template_part('includes/musicas');?>
                 </div>
                 <div class="clearfix one_third_banner_box">
-                    <div class="one_third_column" data-appear-animation="fadeInDown" data-appear-animation-delay="1150">
-                        <div class="scale_image_container">
-                            <div class="button banner_button banner-title blue">GALERIAS</div>
-                            <a href="./galerias.html"><img src="http://unsplash.it/555/374?random&gravity=center"
-                                     alt="" class="scale_image" /></a>
-                        </div>
-                    </div>
+                    <?php get_template_part('includes/galleries');?>
                     <div class="one_third_column" data-appear-animation="fadeInDown" data-appear-animation-delay="1150">
                         <div class="scale_image_container">
                             <div class="button banner_button banner-title orange">EVENTOS</div>
-                            <a href="./eventos.html"><img src="http://unsplash.it/555/374?random&gravity=west" alt=""
+                            <a href="./eventos.html"><img src="<?php echo get_template_directory_uri(); ?>/media/003.jpg" alt=""
                                      class="scale_image" /></a>
                         </div>
                     </div>
@@ -81,19 +39,25 @@
                                      data-appear-animation-delay="1150">
                                     <h3 class="section_title text-primary">GANATELO</h3>
                                     <div class="scale_image_container">
+                                        <div class="text-top text-dark text-uppercase text-right text-big">GANTE LA<br>moto</div>
                                         <a href="./registrate.html"><img
-                                                 src="http://unsplash.it/360/180?random&gravity=center" alt=""
+                                                 src="<?php echo get_template_directory_uri(); ?>/media/011.jpg" alt=""
                                                  class="scale_image" /></a>
+                                        <div class="text-bottom text-dark text-uppercase text-left text-smol">REGISTRATE YA</div>
                                     </div>
                                     <div class="scale_image_container">
+                                        <div class="text-top text-light text-uppercase text-left text-big">GANATE UNAS VACACIONES</div>
                                         <a href="./registrate.html"><img
-                                                 src="http://unsplash.it/360/180?random&gravity=south" alt=""
+                                                 src="<?php echo get_template_directory_uri(); ?>/media/010.jpg" alt=""
                                                  class="scale_image" /></a>
+                                        <div class="text-bottom text-dark text-uppercase text-right text-smol">REGISTRATE YA</div>
                                     </div>
                                     <div class="scale_image_container">
+                                        <div class="text-top text-light text-uppercase text-left text-big">GANATE<br>Lost Boleto</div>
                                         <a href="./registrate.html"><img
-                                                 src="http://unsplash.it/360/180?random&gravity=north" alt=""
+                                                 src="<?php echo get_template_directory_uri(); ?>/media/009.jpg" alt=""
                                                  class="scale_image" /></a>
+                                        <div class="text-bottom text-light text-uppercase text-right text-smol">Registrate ya</div>
                                     </div>
                                 </div>
                             </div>
@@ -108,7 +72,7 @@
                                                 <li>
                                                     <div class="scale_image_container">
                                                         <a href="#"><img
-                                                                 src="http://unsplash.it/165/110?random&gravity=north"
+                                                                 src="<?php echo get_template_directory_uri(); ?>/media/008.jpg"
                                                                  alt="" class="scale_image" /></a>
                                                     </div>
                                                     <a href="#">
@@ -120,7 +84,7 @@
                                                 <li>
                                                     <div class="scale_image_container">
                                                         <a href="#"><img
-                                                                 src="http://unsplash.it/165/110?random&gravity=south"
+                                                                 src="<?php echo get_template_directory_uri(); ?>/media/006.jpg"
                                                                  alt="" class="scale_image" /></a>
                                                     </div>
                                                     <a href="#">
@@ -136,7 +100,7 @@
                                                 <li>
                                                     <div class="scale_image_container">
                                                         <a href="#"><img
-                                                                 src="http://unsplash.it/165/110?random&gravity=west"
+                                                                 src="<?php echo get_template_directory_uri(); ?>/media/007.jpg"
                                                                  alt="" class="scale_image" /></a>
                                                     </div>
                                                     <a href="#">
@@ -148,7 +112,7 @@
                                                 <li>
                                                     <div class="scale_image_container">
                                                         <a href="#"><img
-                                                                 src="http://unsplash.it/165/110?random&gravity=east"
+                                                                 src="<?php echo get_template_directory_uri(); ?>/media/005.jpg"
                                                                  alt="" class="scale_image" /></a>
                                                     </div>
                                                     <a href="#">
@@ -183,7 +147,7 @@
                                     <div class="scale_image_container">
                                         <div class="button banner_button banner-title orange">CHICAS</div>
                                         <a href="./chicas.html"><img
-                                                 src="http://unsplash.it/565/377?random&gravity=south" alt=""
+                                                 src="<?php echo get_template_directory_uri(); ?>/media/013.jpg" alt=""
                                                  class="scale_image" /></a>
                                         <!--caption-->
                                         <div class="caption_type_1">
@@ -209,7 +173,7 @@
                                     <div class="scale_image_container">
                                         <div class="button banner_button banner-title blue">NOTICIAS</div>
                                         <a href="./noticias.html"><img
-                                                 src="http://unsplash.it/565/377?random&gravity=north" alt=""
+                                                 src="<?php echo get_template_directory_uri(); ?>/media/012.jpg" alt=""
                                                  class="scale_image" /></a>
                                         <!--caption-->
                                         <div class="caption_type_1">
@@ -239,7 +203,7 @@
                                     <ul class="small_post_list m-push xs-flex-list">
                                         <li>
                                             <div class="scale_image_container">
-                                                <a href="#"><img src="http://unsplash.it/165/110?random&gravity=north"
+                                                <a href="#"><img src="<?php echo get_template_directory_uri(); ?>/media/018.jpg"
                                                          alt="" class="scale_image" /></a>
                                                 <div class="post_image_buttons"><a href="./galleria_item.html"
                                                        class="icon_box"><i class="fa fa-camera"></i></a></div>
@@ -251,7 +215,7 @@
                                         </li>
                                         <li>
                                             <div class="scale_image_container">
-                                                <a href="#"><img src="http://unsplash.it/165/110?random&gravity=south"
+                                                <a href="#"><img src="<?php echo get_template_directory_uri(); ?>/media/017.jpg"
                                                          alt="" class="scale_image" /></a>
                                                 <div class="post_image_buttons"><a href="./galleria_item.html"
                                                        class="icon_box"><i class="fa fa-camera"></i></a></div>
@@ -263,7 +227,7 @@
                                         </li>
                                         <li>
                                             <div class="scale_image_container">
-                                                <a href="#"><img src="http://unsplash.it/165/110?random&gravity=west"
+                                                <a href="#"><img src="<?php echo get_template_directory_uri(); ?>/media/016.jpg"
                                                          alt="" class="scale_image" /></a>
                                                 <div class="post_image_buttons"><a href="./galleria_item.html"
                                                        class="icon_box"><i class="fa fa-camera"></i></a></div>
@@ -305,7 +269,7 @@
                                                     <li class="clearfix">
                                                         <div class="scale_image_container">
                                                             <a href="./eventos.html"><img
-                                                                     src="http://unsplash.it/165/110?random&gravity=north"
+                                                                     src="<?php echo get_template_directory_uri(); ?>/media/022.jpg"
                                                                      alt="" class="scale_image" /></a>
                                                             <div class="post_image_buttons"><a href="./tickets.html"
                                                                    class="icon_box"><i class="fa fa-ticket"></i></a>
@@ -331,7 +295,7 @@
                                                     <li class="clearfix">
                                                         <div class="scale_image_container">
                                                             <a href="./eventos.html"><img
-                                                                     src="http://unsplash.it/165/110?random&gravity=west"
+                                                                     src="<?php echo get_template_directory_uri(); ?>/media/019.jpg"
                                                                      alt="" class="scale_image" /></a>
                                                             <div class="post_image_buttons"><a href="./tickets.html"
                                                                    class="icon_box"><i class="fa fa-ticket"></i></a>
@@ -357,7 +321,7 @@
                                                     <li class="clearfix">
                                                         <div class="scale_image_container">
                                                             <a href="./eventos.html"><img
-                                                                     src="http://unsplash.it/165/110?random&gravity=north"
+                                                                     src="<?php echo get_template_directory_uri(); ?>/media/020.jpg"
                                                                      alt="" class="scale_image" /></a>
                                                             <div class="post_image_buttons"><a href="./tickets.html"
                                                                    class="icon_box"><i class="fa fa-ticket"></i></a>
@@ -383,7 +347,7 @@
                                                     <li class="clearfix">
                                                         <div class="scale_image_container">
                                                             <a href="./eventos.html"><img
-                                                                     src="http://unsplash.it/165/110?random&gravity=south"
+                                                                     src="<?php echo get_template_directory_uri(); ?>/media/019.jpg"
                                                                      alt="" class="scale_image" /></a>
                                                             <div class="post_image_buttons"><a href="./tickets.html"
                                                                    class="icon_box"><i class="fa fa-ticket"></i></a>
@@ -480,7 +444,7 @@
                             <h3 class="section_title text-primary">DIRECTORIO</h3>
                             <div class="scale_image_container">
                                 <div class="button banner_button banner-title orange">DIRECTORIO</div>
-                                <a href="./directorio.html"><img src="http://unsplash.it/555/374?random&gravity=center"
+                                <a href="./directorio.html"><img src="<?php echo get_template_directory_uri(); ?>/media/015.jpg"
                                          alt="" class="scale_image" /></a>
                             </div>
                         </div>
@@ -489,7 +453,7 @@
                             <h3 class="section_title text-primary">DE COMPRAS</h3>
                             <div class="scale_image_container">
                                 <div class="button banner_button banner-title blue">DE COMPRAS</div>
-                                <a href="./de-compras.html"><img src="http://unsplash.it/555/374?random&gravity=north"
+                                <a href="./de-compras.html"><img src="<?php echo get_template_directory_uri(); ?>/media/014.jpg"
                                          alt="" class="scale_image" /></a>
                             </div>
                         </div>
