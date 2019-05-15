@@ -361,4 +361,59 @@ function adzone_double(){
              alt="" class="scale_image" /></a>
 </div>
 
-<?php } ?>
+<?php 
+	} 
+
+	function custom_user_profile_fields($user){
+?>
+	    <table class="form-table">
+	        <tr>
+	            <th><label for="age">Age</label></th>
+	            <td>
+	                <input type="text" class="regular-text" name="age" value="<?php echo esc_attr( get_the_author_meta( 'age', $user->ID ) ); ?>" id="age" /><br />
+	            </td>
+	        </tr>
+	        <tr>
+	            <th><label for="gender">Gender</label></th>
+	            <td>
+	                <select name="gender" id="gender">
+	                	<option value="male" <?php if(esc_attr( get_the_author_meta( 'gender', $user->ID ) ) == 'male'){ echo 'selected'; } ?>>Male</option>
+	                	<option value="female" <?php if(esc_attr( get_the_author_meta( 'gender', $user->ID ) ) == 'female'){ echo 'selected'; } ?>>Female</option>
+	                </select>
+	            </td>
+	        </tr>
+	        <tr>
+	            <th><label for="location">Ciudad</label></th>
+	            <td>
+	                <select name="location" id="location">
+	                	<?php  
+	                		$locations = get_terms('location', array('hide_empty' => false,));
+	                		foreach ($locations as $location) {
+	                	?>
+	                	<option value="<?php echo $location->term_id ?>" <?php if(esc_attr( get_the_author_meta( 'location', $user->ID ) ) == $location->term_id){ echo 'selected'; } ?>><?php echo $location->name; ?></option>
+	                	<?php } ?>
+	                </select>
+	            </td>
+	        </tr>
+	    </table>
+	  <?php
+	}
+
+	add_action( 'show_user_profile', 'custom_user_profile_fields' );
+	add_action( 'edit_user_profile', 'custom_user_profile_fields' );
+	add_action( "user_new_form", "custom_user_profile_fields" );
+
+	function save_custom_user_profile_fields($user_id){
+	    # again do this only if you can
+	    if(!current_user_can('manage_options'))
+	        return false;
+
+	    # save my custom field
+	    update_usermeta($user_id, 'age', $_POST['age']);
+	    update_usermeta($user_id, 'gender', $_POST['gender']);
+	    update_usermeta($user_id, 'location', $_POST['location']);
+	}
+
+	add_action('user_register', 'save_custom_user_profile_fields');
+	add_action('profile_update', 'save_custom_user_profile_fields');
+?>
