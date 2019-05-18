@@ -32,23 +32,37 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="section_2">
-                      <form class="form_type_1 type_2">
+                      <form class="form_type_1 type_2" action="<?php echo esc_url( admin_url('admin-post.php') ); ?>" method="POST">
+                        <input type="hidden" name="action" value="login_form">
+                        <input type="hidden" name="page_id" value="<?php echo $post->ID; ?>">
+                        <?php if(isset($_SESSION['success'])){ ?>
+                          <div class="alert alert-success"><?php echo $_SESSION['success']; ?></div>
+                        <?php } ?>
+                        <?php if(isset($_SESSION['errors'])){ ?>
+                          <div class="alert alert-error">
+                            <ul>
+                              <?php foreach ($_SESSION['errors'] as $error) { ?>
+                                <li><i class="fa fa-exclamation-circle"></i> <?php echo $error; ?></li>
+                              <?php } ?>
+                            </ul>
+                          </div>
+                        <?php } ?>
                         <div class="control-group">
                           <label class="control-label"><b>Username</b></label>
                           <div class="controls">
-                            <input name="textinput" name="username" type="text">
+                            <input name="username" type="text" value="<?php if(isset($_SESSION['input']['username'])){ echo $_SESSION['input']['username']; } ?>">
                           </div>
                         </div>
                         <div class="control-group">
                           <label class="control-label"><b>Password</b></label>
                           <div class="controls">
-                            <input name="textinput" name="password" type="password" placeholder=""> 
+                            <input name="password" type="password" placeholder=""> 
                           </div>
                         </div> 
                         <div class="control-group form-elements">
-                          <input type="checkbox" id="remember"><label for="remember"><b>Recuérdame</b></label>  
+                          <input type="checkbox" id="remember" name="remember"><label for="remember"><b>Recuérdame</b></label>  
                         </div>
-                        <a href="<?php echo get_site_url(); ?>/login/" class="button button_type_icon_big button_orange">LOG IN<i class="fa fa-chevron-right"></i></a><br>
+                        <button class="button button_type_icon_big button_orange" type="submit">LOGIN</button><br>
                         <br>
                         <a href="<?php echo get_site_url(); ?>/forgot/" class="text-dark">¿Olvidaste tu contraseña?</a><br>
                         <a href="<?php echo get_site_url(); ?>/forgot/" class="text-dark">¿Olvidó su nombre de usuario?</a>
@@ -105,5 +119,7 @@
         </div>
       </div>
 <?php  
+  unset($_SESSION['errors']);
+  unset($_SESSION['input']);
 	get_footer();
 ?>

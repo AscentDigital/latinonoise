@@ -1,4 +1,10 @@
 <?php  
+	function register_session(){
+	    if( !session_id() )
+	        session_start();
+	}
+	add_action('init','register_session');
+
 	function resources(){
 		wp_enqueue_style('bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css');
 		wp_enqueue_style('style-css', get_template_directory_uri() . '/css/style.css');
@@ -416,4 +422,121 @@ function adzone_double(){
 
 	add_action('user_register', 'save_custom_user_profile_fields');
 	add_action('profile_update', 'save_custom_user_profile_fields');
+
+	function register_user_form(){
+		$errors = array();
+		$required = array(
+			'first_name' => 'First Name',
+			'last_name' => 'Last Name',
+			'email' => 'Email Address',
+			'age' => 'Age',
+			'gender' => 'Gender',
+			'username' => 'Username',
+			'password' => 'Password',
+			'confirm_password' => 'Confirm Password',
+			'location' => 'Ciudad',
+		);
+
+		foreach ($required as $key => $value) {
+			if(!isset($_POST[$key]) || empty($_POST[$key])){
+				$errors[] = $value . ' is required.';
+			}
+		}
+
+		if((isset($_POST['username']) && !empty($_POST['username'])) && username_exists($_POST['username'])){
+			$errors[] = 'Username already exists.';
+		}
+
+		if((isset($_POST['email']) && !empty($_POST['email'])) && email_exists($_POST['email'])){
+			$errors[] = 'Email address already exists.';
+		}
+
+		if((isset($_POST['email']) && !empty($_POST['email'])) && !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+			$errors[] = 'Invalid Email address.';
+		}
+
+		if((isset($_POST['password']) && !empty($_POST['password'])) && (isset($_POST['confirm_password']) && !empty($_POST['confirm_password'])) && $_POST['password'] != $_POST['confirm_password']){ 
+			$errors[] = 'Passwords does not match.';
+		}
+
+		if(!isset($_POST['terms'])){
+			$errors[] = 'Please agree to the terms of service.';
+		}
+
+		if($errors){
+			$_SESSION['errors'] = $errors;
+			$_SESSION['inputs'] = $_POST;
+			wp_redirect(get_permalink($_POST['page_id']));
+			exit();
+		}
+
+		$result = wp_insert_user(array(
+			'user_pass' => $_POST['password'],
+			'user_login' => $_POST['username'],
+			'user_email' => $_POST['email'],
+			'first_name' => $_POST['first_name'],
+			'last_name' => $_POST['last_name'],
+			'role' => 'subscriber',
+		));
+		if(isset($result->errors)){
+			foreach ($result->errors as $key => $value) {
+				$errors[] = $value[0];
+				$_SESSION['errors'] = $errors;
+				$_SESSION['inputs'] = $_POST;
+				wp_redirect(get_permalink($_POST['page_id']));
+				exit();
+			}
+		}else{
+			update_usermeta($result, 'age', $_POST['age']);
+		    update_usermeta($result, 'gender', $_POST['gender']);
+		    update_usermeta($result, 'location', $_POST['location']);
+
+			$_SESSION['success'] = 'Your new account has been created. You may now login';
+			$_SESSION['input']['username'] = $_POST['username'];
+			wp_redirect(get_permalink(198));
+		}
+	}
+
+	add_action( 'admin_post_nopriv_registration_form', 'register_user_form' );
+	add_action( 'admin_post_registration_form', 'register_user_form' );	
+
+	function login_user_form(){
+		$errors = array();
+		$required = array(
+			'username' => 'Username',
+			'password' => 'Password',
+		);
+
+		foreach ($required as $key => $value) {
+			if(!isset($_POST[$key]) || empty($_POST[$key])){
+				$errors[] = $value . ' is required.';
+			}
+		}
+
+		if($errors){
+			$_SESSION['errors'] = $errors;
+			$_SESSION['inputs'] = $_POST;
+			wp_redirect(get_permalink($_POST['page_id']));
+			exit();
+		}
+
+		$creds = array(
+	        'user_login'    => $_POST['username'],
+	        'user_password' => $_POST['password'],
+	        'remember'      => (isset($_POST['remember']) ? true : false)
+	    );
+	 
+	    $user = wp_signon( $creds, false );
+	 
+	    if ( is_wp_error( $user ) ) {
+	        $errors[] = $user->get_error_message();
+
+	        $_SESSION['errors'] = $errors;
+			$_SESSION['inputs'] = $_POST;
+			wp_redirect(get_permalink($_POST['page_id']));
+	    }
+	}
+
+	add_action( 'admin_post_nopriv_login_form', 'login_user_form' );
+	add_action( 'admin_post_login_form', 'login_user_form' );	
 ?>
