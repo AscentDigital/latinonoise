@@ -1,7 +1,21 @@
 <?php  
 	function register_session(){
+		global $ciudad;
+
 	    if( !session_id() )
 	        session_start();
+
+	    if(isset($_COOKIE['ciudad'])){
+	    	$ciudad = $_COOKIE['ciudad'];
+	    }else if(is_user_logged_in()){
+	    	$ciudad = get_the_author_meta('location', get_current_user_id());
+	    }
+
+	    if(empty($ciudad)){
+	    	$ciudad = 6;
+	    }
+
+	    setcookie("ciudad", $ciudad, time()+3600);
 	}
 	add_action('init','register_session');
 
@@ -534,6 +548,10 @@ function adzone_double(){
 	        $_SESSION['errors'] = $errors;
 			$_SESSION['inputs'] = $_POST;
 			wp_redirect(get_permalink($_POST['page_id']));
+	    }else{
+	    	setcookie("ciudad", get_the_author_meta('location', get_current_user_id()), time()+3600);
+	    	wp_redirect(home_url());
+    		exit();
 	    }
 	}
 

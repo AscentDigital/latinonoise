@@ -61,6 +61,7 @@ global $option;
                                 <div class="login_block">
                                     <ul>
                                         <!--Login-->
+                                        <?php if(!is_user_logged_in()){ ?>
                                         <li class="login_button"><a href="#" role="button"><i
                                             class="fa fa-user login_icon"></i>Iniciar Sesion</a>
                                             <div class="popup">
@@ -93,17 +94,25 @@ global $option;
                                                         </div>
                                                     </li>
                                                     <li class="login_button"><a href="<?php echo get_site_url(); ?>/register/" role="button">Registrate</a></li>
+                                                    <?php }else{ ?>
+                                                        <li class="login_button"><a href="<?php echo wp_logout_url(); ?>" role="button">Logout</a></li>
+                                                    <?php } ?>
                                                     <!--language/location settings-->
                                                     <li class="lang_button"><a role="button" href="#"><span
                                                         class="d_mxs_none">Houston</span></a>
                                                         <ul class="dropdown_list">
-                                                            <li><a href="#" class="tr_delay_hover default_t_color">Houston</a></li>
-                                                            <li><a href="javascript:void();"
-                                                                class=" disabled text-muted tr_delay_hover default_t_color">Austin</a>
-                                                            </li>
-                                                            <li><a href="javascript:void();"
-                                                                class=" disabled text-muted tr_delay_hover default_t_color">San
-                                                            Antionio</a></li>
+                                                            <?php
+                                                                global $ciudad;
+                                                                var_dump($ciudad);
+                                                                $locations = get_terms('location', array('hide_empty' => false,));
+                                                                foreach ($locations as $location) {
+                                                                    if($location->term_id != $ciudad){
+                                                            ?>
+                                                            <li><a href="<?php echo get_permalink($post->ID); ?>" class="tr_delay_hover default_t_color"><?php echo $location->name; ?></a></li>
+                                                            <?php 
+                                                                    }
+                                                                } 
+                                                            ?>
                                                         </ul>
                                                     </li>
                                                 </ul>
