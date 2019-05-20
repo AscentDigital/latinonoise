@@ -96,19 +96,21 @@ global $option;
                                                     <li class="login_button"><a href="<?php echo get_site_url(); ?>/register/" role="button">Registrate</a></li>
                                                     <?php }else{ ?>
                                                         <li class="login_button"><a href="<?php echo wp_logout_url(); ?>" role="button">Logout</a></li>
-                                                    <?php } ?>
+                                                    <?php 
+                                                        } 
+                                                        global $ciudad;
+                                                        $current_location = get_term($ciudad);
+                                                    ?>
                                                     <!--language/location settings-->
                                                     <li class="lang_button"><a role="button" href="#"><span
-                                                        class="d_mxs_none">Houston</span></a>
+                                                        class="d_mxs_none"><?php echo $current_location->name; ?></span></a>
                                                         <ul class="dropdown_list">
                                                             <?php
-                                                                global $ciudad;
-                                                                var_dump($ciudad);
                                                                 $locations = get_terms('location', array('hide_empty' => false,));
                                                                 foreach ($locations as $location) {
                                                                     if($location->term_id != $ciudad){
                                                             ?>
-                                                            <li><a href="<?php echo get_permalink($post->ID); ?>" class="tr_delay_hover default_t_color"><?php echo $location->name; ?></a></li>
+                                                            <li><a href="<?php echo get_permalink($post->ID) . '?' . http_build_query(array('ciudad' => $location->slug)); ?>" class="tr_delay_hover default_t_color"><?php echo $location->name; ?></a></li>
                                                             <?php 
                                                                     }
                                                                 } 

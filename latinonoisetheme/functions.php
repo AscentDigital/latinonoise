@@ -5,7 +5,9 @@
 	    if( !session_id() )
 	        session_start();
 
-	    if(isset($_COOKIE['ciudad'])){
+	    if(isset($_GET['ciudad']) && $loc = get_term_by('slug', $_GET['ciudad'], 'location')){
+	    	$ciudad = $loc->term_id;
+	    }else if(isset($_COOKIE['ciudad'])){
 	    	$ciudad = $_COOKIE['ciudad'];
 	    }else if(is_user_logged_in()){
 	    	$ciudad = get_the_author_meta('location', get_current_user_id());
