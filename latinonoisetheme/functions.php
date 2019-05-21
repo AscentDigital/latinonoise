@@ -21,6 +21,22 @@
 	}
 	add_action('init','register_session');
 
+	function auto_redirect_after_logout(){
+	  wp_redirect(home_url());
+	  exit();
+	}
+
+	add_action('wp_logout','auto_redirect_after_logout');
+
+	function template_redirect_fn(){
+	    if((is_page(198) || is_page(196)) && is_user_logged_in ()){
+	        wp_redirect(home_url());
+	        exit(); 
+	    }
+	}
+
+	add_action( 'template_redirect', 'template_redirect_fn' );
+
 	function resources(){
 		wp_enqueue_style('bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css');
 		wp_enqueue_style('style-css', get_template_directory_uri() . '/css/style.css');
@@ -479,10 +495,15 @@ function adzone_double(){
 			$errors[] = 'Please agree to the terms of service.';
 		}
 
+		$return_url = '';
+		if(isset($_POST['return_url']) && !empty($_POST['return_url'])){
+			$return_url = '?return_url=' . $_POST['return_url'];
+		}
+		
 		if($errors){
 			$_SESSION['errors'] = $errors;
 			$_SESSION['inputs'] = $_POST;
-			wp_redirect(get_permalink($_POST['page_id']));
+			wp_redirect(get_permalink($_POST['page_id']) . $return_url);
 			exit();
 		}
 
@@ -499,7 +520,7 @@ function adzone_double(){
 				$errors[] = $value[0];
 				$_SESSION['errors'] = $errors;
 				$_SESSION['inputs'] = $_POST;
-				wp_redirect(get_permalink($_POST['page_id']));
+				wp_redirect(get_permalink($_POST['page_id']) . $return_url);
 				exit();
 			}
 		}else{
@@ -509,7 +530,7 @@ function adzone_double(){
 
 			$_SESSION['success'] = 'Your new account has been created. You may now login';
 			$_SESSION['input']['username'] = $_POST['username'];
-			wp_redirect(get_permalink(198));
+			wp_redirect(get_permalink(198) . $return_url);
 		}
 	}
 
@@ -529,10 +550,15 @@ function adzone_double(){
 			}
 		}
 
+		$return_url = '';
+		if(isset($_POST['return_url']) && !empty($_POST['return_url'])){
+			$return_url = '?return_url=' . $_POST['return_url'];
+		}
+
 		if($errors){
 			$_SESSION['errors'] = $errors;
 			$_SESSION['inputs'] = $_POST;
-			wp_redirect(get_permalink($_POST['page_id']));
+			wp_redirect(get_permalink($_POST['page_id']) . $return_url);
 			exit();
 		}
 
@@ -549,10 +575,17 @@ function adzone_double(){
 
 	        $_SESSION['errors'] = $errors;
 			$_SESSION['inputs'] = $_POST;
-			wp_redirect(get_permalink($_POST['page_id']));
+
+			wp_redirect(get_permalink($_POST['page_id']) . $return_url);
 	    }else{
 	    	setcookie("ciudad", get_the_author_meta('location', get_current_user_id()), time()+3600);
-	    	wp_redirect(home_url());
+
+	    	if(isset($_POST['return_url']) && !empty($_POST['return_url'])){
+	    		wp_redirect($_POST['return_url']);
+	    	}else{
+	    		wp_redirect(home_url());
+	    	}
+	    	
     		exit();
 	    }
 	}

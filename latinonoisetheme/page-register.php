@@ -46,6 +46,9 @@
                         <?php } ?>
                         <input type="hidden" name="action" value="registration_form">
                         <input type="hidden" name="page_id" value="<?php echo $post->ID; ?>">
+                        <?php if(isset($_GET['return_url']) && !empty($_GET['return_url'])){ ?>
+                          <input type="hidden" name="return_url" value="<?php echo $_GET['return_url']; ?>">
+                        <?php } ?>
                         <div class="control-group">
                           <label class="control-label"><b>First Name</b></label>
                           <div class="controls">
@@ -116,7 +119,7 @@
                         <div class="control-group form-elements">
                           <input type="checkbox" id="terms" name="terms"><label for="terms"><b>I agree to the <a href="./terms.html">Terms of Service</a></b></label>  
                         </div>
-                        <button class="button button_type_icon_big button_orange" type="submit">RESGISTATE</button><br>
+                        <button class="button button_type_icon_big button_orange" type="submit">RESGISTATE<i class="fa fa-chevron-right"></i></button><br>
                         <br>
                         <a href="./forgot.html" class="text-dark">¿Olvidaste tu contraseña?</a><br>
                         <a href="./forgot.html" class="text-dark">¿Olvidó su nombre de usuario?</a>

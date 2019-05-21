@@ -57,13 +57,12 @@
                                         </p>
                                         <div class="clearfix">
                                             <?php if(is_user_logged_in()){ ?>
-                                            <a href="#" class="btn-custom button button_type_icon_medium button_orange">REGíSTRAME ahora<i
-                                                   class="fa fa-chevron-right"></i></a>
+                                            <button type="submit" class="btn-custom button button_type_icon_medium button_orange">REGíSTRAME ahora<i class="fa fa-chevron-right"></i></button>
                                             <?php }else{ ?>
-                                            <a href="#" class="btn-custom button button_type_icon_medium button_orange">INICIE SESIÓN PARA REGISTRARSE<i
+                                            <a href="<?php echo get_permalink(198) . '?return_url=' . get_permalink(); ?>" class="btn-custom button button_type_icon_medium button_orange">INICIE SESIÓN PARA REGISTRARSE<i
                                                    class="fa fa-chevron-right"></i></a><br><br>
 
-                                            <a href="#" class="btn-custom button button_type_icon_medium button_orange">¿AÚN NO TIENES UNA CUENTA? REGÍSTRATE AHORA<i
+                                            <a href="<?php echo get_permalink(196) . '?return_url=' . get_permalink(); ?>" class="btn-custom button button_type_icon_medium button_orange">¿AÚN NO TIENES UNA CUENTA? REGÍSTRATE AHORA<i
                                                    class="fa fa-chevron-right"></i></a>
                                             <?php } ?>
                                         </div>

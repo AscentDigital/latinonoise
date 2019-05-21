@@ -65,21 +65,26 @@ global $option;
                                         <li class="login_button"><a href="#" role="button"><i
                                             class="fa fa-user login_icon"></i>Iniciar Sesion</a>
                                             <div class="popup">
-                                                <form>
+                                                <form action="<?php echo esc_url( admin_url('admin-post.php') ); ?>" method="POST">
+                                                    <input type="hidden" name="action" value="login_form">
+                                                    <input type="hidden" name="page_id" value="198">
+                                                    <?php if(isset($_GET['return_url']) && !empty($_GET['return_url'])){ ?>
+                                                      <input type="hidden" name="return_url" value="<?php echo $_GET['return_url']; ?>">
+                                                    <?php } ?>
                                                     <ul>
                                                         <li>
                                                             <label for="username">Username</label>
                                                             <br />
-                                                            <input type="text" name="" id="username" /> </li>
+                                                            <input type="text" name="username" id="username" /> </li>
                                                             <li>
                                                                 <label for="password">Password</label>
                                                                 <br />
-                                                                <input type="password" name="" id="password" /> </li>
+                                                                <input type="password" name="password" id="password" /> </li>
                                                                 <li>
-                                                                    <input type="checkbox" id="checkbox_10" />
+                                                                    <input type="checkbox" id="checkbox_10" name="remember"/>
                                                                     <label for="checkbox_10">Recuérdame</label>
                                                                 </li>
-                                                                <li><a href="<?php echo get_site_url(); ?>/login/" class="button button_orange">Log In</a>
+                                                                <li><button type="submit" class="button button_orange">Log In</button>
                                                                     <div class="t_align_c"><a href="<?php echo get_site_url(); ?>/forgot/"
                                                                         class="color_dark">¿Olvidaste tu contraseña?</a>
                                                                         <br /><a href="<?php echo get_site_url(); ?>/forgot/" class="color_dark">¿Olvidó su nombre
@@ -94,7 +99,11 @@ global $option;
                                                         </div>
                                                     </li>
                                                     <li class="login_button"><a href="<?php echo get_site_url(); ?>/register/" role="button">Registrate</a></li>
-                                                    <?php }else{ ?>
+                                                    <?php 
+                                                        }else{
+                                                            global $current_user;
+                                                    ?>
+                                                        <li class="login_button"><a href="javascript:void();"><i class="fa fa-user login_icon"></i><?php echo $current_user->display_name; ?></a></li>
                                                         <li class="login_button"><a href="<?php echo wp_logout_url(); ?>" role="button">Logout</a></li>
                                                     <?php 
                                                         } 

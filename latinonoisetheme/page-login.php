@@ -35,6 +35,9 @@
                       <form class="form_type_1 type_2" action="<?php echo esc_url( admin_url('admin-post.php') ); ?>" method="POST">
                         <input type="hidden" name="action" value="login_form">
                         <input type="hidden" name="page_id" value="<?php echo $post->ID; ?>">
+                        <?php if(isset($_GET['return_url']) && !empty($_GET['return_url'])){ ?>
+                          <input type="hidden" name="return_url" value="<?php echo $_GET['return_url']; ?>">
+                        <?php } ?>
                         <?php if(isset($_SESSION['success'])){ ?>
                           <div class="alert alert-success"><?php echo $_SESSION['success']; ?></div>
                         <?php } ?>
@@ -121,5 +124,6 @@
 <?php  
   unset($_SESSION['errors']);
   unset($_SESSION['input']);
+  unset($_SESSION['success']);
 	get_footer();
 ?>
