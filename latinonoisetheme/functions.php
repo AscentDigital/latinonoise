@@ -600,6 +600,8 @@ function adzone_double(){
 	add_action( 'admin_post_login_form', 'login_user_form' );
 
 	function ganatelo_form(){
+		global $wpdb;
+
 		$errors = array();
 		$required = array(
 			'page_id' => 'Ganatelo',
@@ -629,8 +631,53 @@ function adzone_double(){
 			exit();
 		}
 
+
+
+ 		$result = $wpdb->insert($wpdb->prefix . 'ganatelo', array(
+            'ganatelo_id' => $_POST['page_id'],
+            'user_id'  =>   get_current_user_id(),
+            'created' => date('Y-m-d H:i:s'),
+           	'modified' => date('Y-m-d H:i:s'),
+        ));
+
+        if($result){
+        	$_SESSION['success'] = 'You have been registered succesfully.';
+        }else{
+        	$errors[] = 'Something went wrong. Please try again later.';
+        }
+
+        wp_redirect(get_permalink($_POST['page_id']));
+		exit();
 	}
 
 	add_action( 'admin_post_nopriv_ganatelo_form', 'ganatelo_form' );
 	add_action( 'admin_post_ganatelo_form', 'ganatelo_form' );	
+
+	/** Step 2 (from text above). */
+	add_action( 'admin_menu', 'ganatelo_menu' );
+
+	/** Step 1. */
+	function ganatelo_menu() {
+		add_menu_page( 'Ganatelo', 'Ganatelo', 'manage_options', 'ganatelo-list', 'ganatelo_list' );
+	}
+
+	/** Step 3. */
+	function ganatelo_list() {
+		if ( !current_user_can( 'manage_options' ) )  {
+			wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
+		}
+		
+		require_once( ABSPATH . 'wp-content/themes/latinonoisetheme/classes/class-wp-ganatelo-list.php' );
+?>
+		<div class="wrap">
+		<div id="icon-users" class="icon32"></div>
+		<h2>My List Table Test</h2>
+<?php
+		$wp_ganatelo_table = new Ganatelo_List_Table();
+		$wp_ganatelo_table->prepare_items();
+		$wp_ganatelo_table->display();
+?>
+		</div>
+<?php	
+	}
 ?>

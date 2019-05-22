@@ -56,21 +56,25 @@
                                         <?php echo get_field('texto'); ?>
                                         </p>
                                         <div class="clearfix">
+                                            <?php if(isset($_SESSION['errors'])){ ?>
+                                              <div class="alert alert-error">
+                                                <ul>
+                                                  <?php foreach ($_SESSION['errors'] as $error) { ?>
+                                                    <li><i class="fa fa-exclamation-circle"></i> <?php echo $error; ?></li>
+                                                  <?php } ?>
+                                                </ul>
+                                              </div>
+                                            <?php } ?>
+                                            <?php if(isset($_SESSION['success'])){ ?>
+                                              <div class="alert alert-success"><?php echo $_SESSION['success']; ?></div>
                                             <?php 
+                                                }
+                                                 
                                                 if(is_user_logged_in()){
                                                     $count = is_registered_ganatelo($post->ID, get_current_user_id());
                                                     if(!$count){
                                             ?>
                                                         <form action="<?php echo esc_url( admin_url('admin-post.php') ); ?>" method="POST">
-                                                            <?php if(isset($_SESSION['errors'])){ ?>
-                                                              <div class="alert alert-error">
-                                                                <ul>
-                                                                  <?php foreach ($_SESSION['errors'] as $error) { ?>
-                                                                    <li><i class="fa fa-exclamation-circle"></i> <?php echo $error; ?></li>
-                                                                  <?php } ?>
-                                                                </ul>
-                                                              </div>
-                                                            <?php } ?>
                                                             <input type="hidden" name="action" value="ganatelo_form">
                                                             <input type="hidden" name="page_id" value="<?php echo $post->ID; ?>">
                                                             <button type="submit" class="btn-custom button button_type_icon_medium button_orange"><?php _e('REGíSTRAME ahora'); ?><i class="fa fa-chevron-right"></i></button>
@@ -138,4 +142,5 @@
     endif; 
 	get_footer();
     unset($_SESSION['errors']);
+    unset($_SESSION['success']);
 ?>
