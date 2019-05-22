@@ -1,4 +1,10 @@
 <?php  
+	function is_registered_ganatelo($ganatelo_id, $user_id){
+		global $wpdb;
+		$count = $wpdb->get_var('SELECT COUNT(*) FROM ' . $wpdb->prefix . 'ganatelo WHERE ganatelo_id = ' . $ganatelo_id . ' AND user_id = ' . $user_id);
+		return $count;
+	}
+
 	function register_session(){
 		global $ciudad;
 
@@ -591,5 +597,40 @@ function adzone_double(){
 	}
 
 	add_action( 'admin_post_nopriv_login_form', 'login_user_form' );
-	add_action( 'admin_post_login_form', 'login_user_form' );	
+	add_action( 'admin_post_login_form', 'login_user_form' );
+
+	function ganatelo_form(){
+		$errors = array();
+		$required = array(
+			'page_id' => 'Ganatelo',
+		);
+
+		foreach ($required as $key => $value) {
+			if(!isset($_POST[$key]) || empty($_POST[$key])){
+				$errors[] = $value . ' is required.';
+			}
+		}
+
+		if('publish' != get_post_status($_POST['page_id']) || get_post_type($_POST['page_id']) != 'ganatelos') {
+		    $errors[] = 'Ganatelo does not exist.';
+		}
+
+		if(!is_user_logged_in()){
+			$errors[] = 'Please login to register.';
+		}
+
+		if(is_user_logged_in() && is_registered_ganatelo($_POST['page_id'], get_current_user_id())){
+			$errors[] = 'You are already registered.';
+		}
+
+		if($errors){
+			$_SESSION['errors'] = $errors;
+			wp_redirect(get_permalink($_POST['page_id']));
+			exit();
+		}
+
+	}
+
+	add_action( 'admin_post_nopriv_ganatelo_form', 'ganatelo_form' );
+	add_action( 'admin_post_ganatelo_form', 'ganatelo_form' );	
 ?>
