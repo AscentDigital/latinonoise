@@ -1,7 +1,15 @@
 <?php  
 	function is_registered_ganatelo($ganatelo_id, $user_id){
 		global $wpdb;
+
 		$count = $wpdb->get_var('SELECT COUNT(*) FROM ' . $wpdb->prefix . 'ganatelo WHERE ganatelo_id = ' . $ganatelo_id . ' AND user_id = ' . $user_id);
+		return $count;
+	}
+
+	function get_registered_count($ganatelo_id){
+		global $wpdb;
+
+		$count = $wpdb->get_var('SELECT COUNT(*) FROM ' . $wpdb->prefix . 'ganatelo WHERE ganatelo_id = ' . $ganatelo_id . ' AND status = "active"');
 		return $count;
 	}
 
@@ -671,7 +679,7 @@ function adzone_double(){
 ?>
 		<div class="wrap">
 		<div id="icon-users" class="icon32"></div>
-		<h2>My List Table Test</h2>
+		<h2><?php _e('Ganatelos'); ?></h2>
 <?php
 		$wp_ganatelo_table = new Ganatelo_List_Table();
 		$wp_ganatelo_table->prepare_items();

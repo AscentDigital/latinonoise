@@ -9,16 +9,6 @@
         ));
     }
 
-    function extra_tablenav( $which ) {
-      if ( $which == "top" ){
-        echo"Hello, I'm before the table";
-      }
-
-      if ( $which == "bottom" ){
-        echo"Hi, I'm after the table";
-      }
-    }
-
     function get_columns() {
       return $columns= array(
         'post_title' => __('Ganatelo'),
@@ -48,8 +38,8 @@
     }
 
     $totalitems = $wpdb->query($query);
-    $perpage = 5;
-    $paged = !empty($_GET["paged"]) ? mysql_real_escape_string($_GET["paged"]) : '';
+    $perpage = 20;
+    $paged = !empty($_GET["paged"]) ? $_GET["paged"] : '';
 
     if(empty($paged) || !is_numeric($paged) || $paged<=0 ){ 
       $paged=1;
@@ -76,30 +66,44 @@
   }
 
   function display_rows() {
-  $records = $this->items;
-  list( $columns, $hidden ) = $this->get_column_info();
+    global $wpdb;
 
-  if(!empty($records)){
-    foreach($records as $rec){
-        echo '<tr id="record_'.$rec->ID.'">';
-        foreach($columns as $column_name => $column_display_name){
-          $class = "class='$column_name column-$column_name'";
-          $style = "";
-          if(in_array($column_name, $hidden)) $style = ' style="display:none;"';
-          $attributes = $class . $style;
+    $records = $this->items;
+    list( $columns, $hidden ) = $this->get_column_info();
 
-         //Display the cell
-         switch ( $column_name ) {
-            case "post_title":  echo '<td '.$attributes.'>'.stripslashes($rec->post_title).'</td>';   break;
-            case "number_of_registrant": echo '<td '.$attributes.'>asd</td>'; break;
-            case "registrants": echo '<td '.$attributes.'>asd</td>'; break;
-            case "winners": echo '<td '.$attributes.'>asd</td>'; break;
-         }
+    if(!empty($records)){
+      foreach($records as $rec){
+          echo '<tr id="record_'.$rec->ID.'">';
+          foreach($columns as $column_name => $column_display_name){
+            $class = "class='$column_name column-$column_name'";
+            $style = "";
+            if(in_array($column_name, $hidden)) $style = ' style="display:none;"';
+            $attributes = $class . $style;
+
+           //Display the cell
+           switch ( $column_name ) {
+              case "post_title":  
+                echo '<td '.$attributes.'>'.stripslashes($rec->post_title).'</td>';   
+                break;
+
+              case "number_of_registrant": 
+                $count = get_registered_count($rec->ID);
+                echo '<td '.$attributes.'>'.$count.'</td>'; 
+                break;
+
+              case "registrants": 
+                echo '<td '.$attributes.'><a href="'.admin_url() . '?page=ganatelo-list&ganatelo_id=' . $rec->ID.'">View</a></td>'; 
+                break;
+              case "winners":
+                echo '<td '.$attributes.'>asd</td>'; 
+                break;
+           }
+        }
+
+        //Close the line
+        echo'</tr>';
       }
-
-      //Close the line
-      echo'</tr>';
-   }}
-}
+    }
+  }
 }
 ?>
