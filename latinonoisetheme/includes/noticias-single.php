@@ -21,12 +21,12 @@ $thumb_url = wp_get_attachment_image_src(get_post_thumbnail_id(), '', false);
      data-appear-animation-delay="1150">
     <div class="scale_image_container">
         <a href="<?php the_permalink();?>"><img src="<?php echo $thumb_url[0]; ?>" alt=""
-                 class="scale_image home-main-images" /></a>
+                 class="scale_image" /></a>
         <!--caption-->
         <div class="caption_type_1">
             <div class="caption_inner">
                 <div class="clearfix"><a href="#" role="button"
-                       class="button banner_button orange">NEWS</a>
+                       class="button banner_button orange">NOTICIAS</a>
                     <div class="event_date"><?php echo get_the_date(); ?></div>
                 </div>
                 <a href="<?php the_permalink();?>">

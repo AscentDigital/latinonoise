@@ -1,0 +1,26 @@
+/* 
+    Title: Extend/Override style.css
+    Date Created: 22 Dec 2019
+    Author: Modified by: https://github.com/dresdain
+*/
+.home-main-images{
+	width:100%;
+	height: auto;
+}
+.noticias-list-image{
+	width:100%;
+	height:106px;
+}
+.eventos-list-image{
+	width:181px;
+	height:121px;
+}
+@media (max-width: 768px) {
+.noticias-list-image{
+	width:100%;
+	height:auto;
+}
+}
+._ning_hidden{
+	opacity: 1 !important;
+}

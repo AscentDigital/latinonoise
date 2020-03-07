@@ -4,6 +4,7 @@
 	if ( have_posts() ) : while ( have_posts() ) : the_post();
 ?>
 <!--==============================content================================-->
+
 		<div class="content">
 			<div class="container">
 				<div class="row">
@@ -165,10 +166,7 @@
 					</div>
 					<!-- END NOTICIAS POST  -->
 
-
-
-
-
+					<?php endwhile; endif; wp_reset_query(); ?>
 
 					<!-- SIDEBAR -->
 					<div class="col-md-3 col-sm- col-xs-12">
@@ -187,6 +185,6 @@
 			</div>
 		</div>
 
-<?php endwhile; endif;
+<?php 
 	get_footer();
 ?>

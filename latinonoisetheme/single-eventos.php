@@ -89,37 +89,6 @@
 							<div class="row">
 								<div class="col-md-12">
 									<div class="section read_post_list gallery_list">
-										<h2 class="section_title text-primary">FOTOS</h2>
-										<ul class="row">
-											<!--Post-->
-											<?php 
-											$images = get_field('gallery');
-											foreach ($images as $image) {
-											?>
-											<li class="col-lg-3 col-md-4 col-sm-4 col-xs-4">
-												<div class="section_post_left">
-													<div class="scale_image_container with_buttons">
-														<a href="#"><img src="<?php echo $image['url']; ?>" alt="" class="scale_image"></a>
-														<div class="open_buttons clearfix">
-															<div class="f_left"><a href="<?php echo $image['url']; ?>" target = "_blank" role="button"
-																   class="jackbox jackbox_button button button_grey_light"
-																   data-group="gallery_1"><i class="fa fa-search-plus"></i></a></div>
-														</div>
-													</div>
-												</div>
-											</li>
-											<?php } ?>
-										</ul> 
-										 
-									</div>
-								</div>
-							</div>
-
-							
-
-							<div class="row">
-								<div class="col-md-12">
-									<div class="section read_post_list gallery_list">
 										<h2 class="section_title text-primary">
 											VIDEOS
 										</h2><br>

@@ -38,7 +38,7 @@
 										            'post_type' => 'noticias',
 											        'paged' => $paged,
 											        'page' => $paged,
-											        'posts_per_page' => 6,
+											        'posts_per_page' => 1,
 										            'order' => 'DESC',
 										            'orderby' => 'post_date'
 										        );
@@ -83,8 +83,7 @@
 											<!-- Divider -->
 											<li class="clearfix">
 												<div class="section t_align_c">
-													<span class="f_right"><?php echo do_shortcode('[adning id="190"]'); ?>
-                                            </span>
+													<a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/728x90.jpg" alt=""></a>
 												</div>
 											</li>
 

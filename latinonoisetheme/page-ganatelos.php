@@ -26,8 +26,8 @@
                                     </ul><a href="#" id="sort_button" class="f_right color_grey_2"><i
                                              class="fa fa-bars f_size_medium"></i> <small>SORT</small></a>
                                     <ul class="sort_list">
-                                        <li><a href="./noticias.html?sort=latest">Latest</a></li>
-                                        <li><a href="./noticias.html?sort=oldest">Oldest</a></li>
+                                        <li><a href="./?sort=latest">Latest</a></li>
+                                        <li><a href="./?sort=oldest">Oldest</a></li>
                                     </ul>
                                 </div>
                                 <!--tabs content-->
@@ -52,45 +52,36 @@
                                                 while($query->have_posts()){
                                                     $query->the_post();
                                                     $thumb_url = wp_get_attachment_image_src(get_post_thumbnail_id(), '', false);
-                                                    $con = get_the_content();
+                                                    $con = get_field('texto');
                                                     $mon = date('M' , strtotime(get_the_date()));
                                                     $day = date('d' , strtotime(get_the_date()));
                                             ?>
                                             <!-- ITEM -->
                                             <li class="clearfix">
-                                                <div class="scale_image_container scale_285">
+                                                <div class="scale_image_container" style = "max-width:none;">
+                                                    <div class="text-top text-light text-uppercase text-right text-big"><?php the_title(); ?></div>
                                                     <a href="<?php the_permalink(); ?>"><img
-                                                                 src="<?php echo get_field('main_image'); ?>"
-                                                                 alt=""
-                                                     class="scale_image "></a>
-                                                    <div class="button banner_button banner-title orange"><?php echo $day; ?> | <?php echo $mon; ?></div> 
+                                                             src="<?php echo $thumb_url[0]; ?>" alt=""
+                                                             class="scale_image" /></a>
+                                                    <div class="text-bottom text-light text-uppercase text-left text-smol">REGISTRATE YA</div>
                                                 </div>
                                                 <div class="wrapper">
                                                     <div class="post_text">
                                                         <h2 class="post_title"><a class="text-accent" href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                                                         </h2><br>
                                                         <div class="clearfix">
-                                                            <div class="f_left">
-                                                                <div class="event_date"><b><span class="text-primary"><i class="fa fa-clock-o"></i> <?php echo get_field('event_date'); ?> <?php echo get_field('start_event_time'); ?> - <?php echo get_field('end_event_time'); ?></span> | <span class="text-accent"><i class="fa fa-map-marker"></i> <?php echo get_field('event_place'); ?></span> </b></div>
-                                                            </div>
+                                                            <div class="event_date text-primary" style = "font-size: 18px;"><b>Registrate Antes Del <?php echo $day; ?> <?php echo $mon; ?></b></div>
                                                         </div> 
-                                                        <small><?php echo substr($con,0,250); ?> […]</small>
+                                                        <small><?php echo substr($con,0,250); ?></small>
                                                             <div class="clearfix">
-                                                                <a href="<?php echo get_field('ticket_link'); ?>" class="btn-custom button button_type_icon_small button_orange">Tickets<i
-                                                                         class="fa fa-ticket"></i></a>
+                                                                <a href="<?php the_permalink(); ?>" class="btn-custom button button_type_icon_small button_orange">Registrate<i
+                                                                         class="fa fa-chevron-right"></i></a>
                                                             </div>
                                                     </div>
                                                 </div>
                                             </li>
                                             <?php } } wp_reset_query(); ?>
                                              
-
-                                            <!-- Divider -->
-                                            <li class="clearfix">
-                                                <div class="section t_align_c">
-                                                    <a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/728x90.jpg" alt=""></a>
-                                                </div>
-                                            </li>
 
 
 

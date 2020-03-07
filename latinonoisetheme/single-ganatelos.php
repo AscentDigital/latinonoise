@@ -1,17 +1,15 @@
 <?php  
 	get_header();
 	if ( have_posts() ) : while ( have_posts() ) : the_post();
+    $thumb_url = wp_get_attachment_image_src(get_post_thumbnail_id(), '', false);
+    $mon = date('M' , strtotime(get_the_date()));
+    $day = date('d' , strtotime(get_the_date()));
 ?>
 <!--==============================content================================-->
         <div class="content">
             <div class="container">
                 <div class="row">
-
-
-
-
-
-                    <!-- NOTICIAS POST -->
+                    <!-- GANATELOS POST -->
                     <div class="col-md-9 col-sm-12 col-xs-12">
                         <div class="section" data-appear-animation="fadeInDown"
                              data-appear-animation-delay="1150">
@@ -21,40 +19,23 @@
                                     <ul class="tabs_nav clearfix">
                                         <li class="">
                                             <a href="#tab-1">
-                                                <h1 class="text-accent"><?php the_title(); ?></h1> 
+                                                <h1 class="text-accent">GANATELO</h1> 
                                             </a>
                                         </li>
                                     </ul>
                                 </div>
                             </div><br>
                             <div class="row">
-                                <div class="col-md-12">
-                                    <div class="scale_image_container">
-                                        <div class="button banner_button banner-title orange"><?php _e('Registrate antes del'); ?> <?php echo get_field('fecha_limite'); ?></div>
-                                        <a href="./la-rifa.html"><img
-                                                 src="<?php echo get_field('main_image'); ?>" width="100%" alt=""
-                                                 class="scale_image" /></a>
-                                        <!--caption-->
-                                        <div class="caption_type_1 scale_less">
-                                            <div class="caption_inner">
-                                                <a href="./la-rifa.html">
-                                                    <p class="text-white text-right">
-                                                        <?php echo get_field('premio'); ?>
-                                                    </p>
-                                                </a>
-                                            </div>
-                                        </div>
+                                <div class="col-md-5">
+                                    <div class="scale_image_container" style = "margin-bottom: 10px;">
+                                        <div class="text-top text-light text-uppercase text-right text-big"><?php the_title(); ?></div>
+                                                    <a href="<?php the_permalink(); ?>"><img
+                                                             src="<?php echo $thumb_url[0]; ?>" alt=""
+                                                             class="scale_image" /></a>
+                                                    <div class="text-bottom text-light text-uppercase text-left text-smol">REGISTRATE YA</div>
                                     </div>
-                                </div>
-                                <div class="col-md-12"> 
-                                    <div class="text_post_section">
-                                        <h1 class="text-accent"><?php echo get_field('titulo'); ?></h1> <br>
-                                        <h3 class="text-muted"><?php _e('Fecha limite de registro'); ?>: <?php echo get_field('fecha_limite'); ?>
-                                        <br>
-                                        <?php echo get_field('premio'); ?></h3>
-                                        <p>
-                                        <?php echo get_field('texto'); ?>
-                                        </p>
+                                    <div style = "text-align: center;">
+                                    <small>Al dar click al boton "Registrame Ahora" estas aceptando los <a href="#">Terminos y Condiciones</a> de la rifa.</small>
                                         <div class="clearfix">
                                             <?php if(isset($_SESSION['errors'])){ ?>
                                               <div class="alert alert-error">
@@ -92,6 +73,18 @@
                                             <a href="<?php echo get_permalink(196) . '?return_url=' . get_permalink(); ?>" class="btn-custom button button_type_icon_medium button_orange"><?php _e('¿AÚN NO TIENES UNA CUENTA? REGÍSTRATE AHORA'); ?><i class="fa fa-chevron-right"></i></a>
                                             <?php } ?>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-7"> 
+                                    <div class="text_post_section" style="margin-top: 0;">
+                                        <h2 class="text-accent"><?php echo get_field('titulo'); ?></h2>
+                                        <div class="event_date text-primary" style = "font-size: 18px;"><b>Registrate Antes Del <?php echo $day; ?> <?php echo $mon; ?></b></div>
+                                        <h3 class="text-muted">
+                                        <?php echo get_field('premio'); ?>
+                                        </h3>
+                                        <p>
+                                        <?php echo get_field('texto'); ?>
+                                        </p>
                                     </div>
                                     <div class="text_post_section add_this">
                                         <div>

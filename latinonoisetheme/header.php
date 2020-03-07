@@ -31,7 +31,6 @@ global $option;
     <link rel="icon" type="image/png" sizes="32x32" href="<?php echo get_template_directory_uri(); ?>/favico/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="<?php echo get_template_directory_uri(); ?>/favico/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="<?php echo get_template_directory_uri(); ?>/favico/favicon-16x16.png">
-    <link rel="manifest" href="<?php echo get_template_directory_uri(); ?>/favico/manifest.json">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="<?php echo get_template_directory_uri(); ?>/favico/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
@@ -139,10 +138,8 @@ global $option;
                                     <div class="col-xs-12">
                                         <div class="clearfix header-flex">
                                             <a href="index.html" class="f_left logo"><img src="<?php echo get_template_directory_uri(); ?>/images/logo.png" alt="" /></a>
-                                            <a href="#" class="f_right"><img
-                                                src="https://placehold.it/370x110/64696D/FFFFFF?text=ANUNCIO%20PUBLICIDAD"
-                                                alt="" /></a>
-                                            </div>
+                                            <span class="f_right"><?php echo do_shortcode("[adning id='184']"); ?>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
