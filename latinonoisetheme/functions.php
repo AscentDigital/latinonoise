@@ -606,7 +606,7 @@ function adzone_double(){
 		    update_usermeta($result, 'location', $_POST['location']);
 			$_SESSION['success'] = 'Your new account has been created. You may now login';
 			$_SESSION['input']['username'] = $_POST['username'];
-			wp_redirect(get_permalink(198) . $return_url);
+			wp_redirect(get_permalink(80) . $return_url);
 		}
 	}
 	add_action( 'admin_post_nopriv_registration_form', 'register_user_form' );
@@ -710,18 +710,34 @@ function adzone_double(){
 		if ( !current_user_can( 'manage_options' ) )  {
 			wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
 		}
-		
-		require_once( ABSPATH . 'wp-content/themes/latinonoisetheme/classes/class-wp-ganatelo-list.php' );
-?>
-		<div class="wrap">
-		<div id="icon-users" class="icon32"></div>
-		<h2><?php _e('Ganatelos'); ?></h2>
-<?php
-		$wp_ganatelo_table = new Ganatelo_List_Table();
-		$wp_ganatelo_table->prepare_items();
-		$wp_ganatelo_table->display();
-?>
-		</div>
-<?php	
+		if(isset($_GET['ganatelo_id'])){
+			if(!isset($_GET['draw'])){
+				require_once( get_template_directory() . '/ganatelo/ganatelo-registrants.php' );
+			}else{
+				require_once( get_template_directory() . '/ganatelo/ganatelo-draw.php' );
+			}
+		}else{
+			require_once( get_template_directory() . '/ganatelo/ganatelo-list.php' );
+		}
 	}
+
+	function wpdocs_selectively_enqueue_admin_script( $hook ) {
+	    if ( 'toplevel_page_ganatelo-list' != $hook ) {
+	        return;
+	    }
+	    wp_enqueue_style( 'ganatlo_css', get_template_directory_uri() . '/css/ganatelo.css', array(), '1.0' );
+	    wp_enqueue_script( 'ganatlo_script', get_template_directory_uri() . '/js/ganatelo.js', array(), '1.0' );
+	    wp_localize_script('ganatlo_script', 'the_ajax_script', array('ajaxurl' =>admin_url('admin-ajax.php')));
+	}
+
+	add_action( 'admin_enqueue_scripts', 'wpdocs_selectively_enqueue_admin_script' );
+
+	function ganatelo_winner_ajax(){
+		global $wpdb;
+
+		$wpdb->query($wpdb->prepare('UPDATE ' . $wpdb->prefix . 'ganatelo SET winner = 1 WHERE user_id = ' . $_POST['id']));
+	}
+
+	add_action('wp_ajax_nopriv_ganatelo_winner_ajax', 'ganatelo_winner_ajax');
+	add_action('wp_ajax_ganatelo_winner_ajax', 'ganatelo_winner_ajax');
 ?>
